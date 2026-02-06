@@ -1061,13 +1061,10 @@
             <div id="player-token" class="player-token hidden"></div>
         </div>
 
-        <!-- Control Button -->
+        <!-- Control Button (kanan saja) -->
         <div id="move-btn-ctrl" class="control-group hidden">
             <div class="btn-dir-container">
-                <button style="grid-column: 2;" class="btn-dir" id="btn-up" onclick="handleMove('up')">▲</button>
-                <button style="grid-column: 1;" class="btn-dir" id="btn-left" onclick="handleMove('left')">◀</button>
-                <button style="grid-column: 3;" class="btn-dir" id="btn-right" onclick="handleMove('right')">▶</button>
-                <button style="grid-column: 2;" class="btn-dir" id="btn-down" onclick="handleMove('down')">▼</button>
+                <button class="btn-dir" id="btn-right" onclick="handleRight()">▶</button>
             </div>
         </div>
     </main>
@@ -1440,64 +1437,20 @@
             overlay.classList.add('show');
         }
 
+        function handleRight() {
+            handleMove('right');
+        }
+
         function updateControlButtons() {
+            const btn = document.getElementById('btn-right');
+            if (!btn) return;
             const i = state.idx;
-            const buttons = {
-                up: document.getElementById('btn-up'),
-                down: document.getElementById('btn-down'),
-                left: document.getElementById('btn-left'),
-                right: document.getElementById('btn-right')
-            };
-
-            // Reset semua tombol
-            Object.values(buttons).forEach(btn => {
-                if (btn) {
-                    btn.disabled = true;
-                    btn.classList.remove('active');
-                }
-            });
-
-            // Top row (0-3): LEFT & RIGHT
-            if (i >= 0 && i < 4) {
-                if (buttons.left) buttons.left.disabled = false;
-                if (buttons.right) buttons.right.disabled = false;
-            }
-            // Corner: Jogja (index 4): LEFT & DOWN
-            else if (i === 4) {
-                if (buttons.left) buttons.left.disabled = false;
-                if (buttons.down) buttons.down.disabled = false;
-            }
-            // Right side (5-7): UP & DOWN
-            else if (i > 4 && i < 8) {
-                if (buttons.up) buttons.up.disabled = false;
-                if (buttons.down) buttons.down.disabled = false;
-            }
-            // Corner: Lombok (index 8): UP & LEFT
-            else if (i === 8) {
-                if (buttons.up) buttons.up.disabled = false;
-                if (buttons.left) buttons.left.disabled = false;
-            }
-            // Bottom row (9-11): LEFT & RIGHT
-            else if (i > 8 && i < 12) {
-                if (buttons.left) buttons.left.disabled = false;
-                if (buttons.right) buttons.right.disabled = false;
-            }
-            // Corner: Ternate (index 12): RIGHT & UP
-            else if (i === 12) {
-                if (buttons.right) buttons.right.disabled = false;
-                if (buttons.up) buttons.up.disabled = false;
-            }
-            // Left side (13-15): UP & DOWN
-            else if (i >= 13) {
-                if (buttons.up) buttons.up.disabled = false;
-                if (buttons.down) buttons.down.disabled = false;
-            }
+            // right is valid on top row and bottom row
+            const canRight = (i >= 0 && i <= 4) || (i >= 9 && i <= 12);
+            btn.disabled = !state.active || state.isMoving || !canRight;
         }
 
         window.addEventListener('keydown', (e) => {
-            if (e.key === "ArrowUp") handleMove('up');
-            if (e.key === "ArrowDown") handleMove('down');
-            if (e.key === "ArrowLeft") handleMove('left');
             if (e.key === "ArrowRight") handleMove('right');
         });
 
