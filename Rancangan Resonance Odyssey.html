@@ -14,15 +14,15 @@
         }
 
         :root {
-            --wood: #c41e3a;
-            --paper: #fff9e6;
-            --gold: #ffd700;
+            --wood: #FFB6D9;
+            --paper: #F0F8FF;
+            --gold: #FFCB99;
         }
 
         body {
-            background-color: #0f1419;
+            background-color: #E6F7FF;
             font-family: 'Georgia', serif;
-            color: #3e2723;
+            color: #5B6D82;
             overflow: hidden;
             height: 100vh;
             display: flex;
@@ -67,17 +67,17 @@
         }
 
         .btn-gold {
-            background: linear-gradient(135deg, #c41e3a 0%, #e63946 100%);
-            color: var(--paper);
+            background: linear-gradient(135deg, #7EC8E3 0%, #A8D8EA 100%);
+            color: #2C5F7F;
             padding: clamp(12px, 2.5vw, 15px) clamp(20px, 5vw, 40px);
             border-radius: 10px;
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: clamp(1px, 0.5vw, 2px);
-            border: 2px solid var(--gold);
+            border: 2px solid #7EC8E3;
             cursor: pointer;
             transition: all 0.2s;
-            box-shadow: 0 clamp(3px, 1vw, 5px) 0 #8b1a38;
+            box-shadow: 0 clamp(3px, 1vw, 5px) 0 #5EB3D6;
             font-size: clamp(13px, 2.5vw, 16px);
             width: 100%;
             margin-top: clamp(8px, 2vw, 10px);
@@ -85,18 +85,18 @@
 
         .btn-gold:hover { 
             transform: translateY(-2px); 
-            background: linear-gradient(135deg, #e63946 0%, #f1566e 100%);
+            background: linear-gradient(135deg, #A8D8EA 0%, #C8E6F5 100%);
         }
 
         .btn-gold:active { 
             transform: translateY(3px); 
-            box-shadow: 0 1px 0 #8b1a38; 
+            box-shadow: 0 1px 0 #5EB3D6; 
         }
 
         #input-player-name {
             width: 100%;
             padding: clamp(10px, 2vw, 12px) clamp(12px, 3vw, 15px);
-            border: clamp(2px, 0.5vw, 4px) solid #667eea;
+            border: clamp(2px, 0.5vw, 4px) solid #7EC8E3;
             border-radius: 8px;
             font-size: clamp(14px, 3vw, 16px);
             font-weight: bold;
@@ -109,11 +109,11 @@
 
         #input-player-name:focus {
             outline: none;
-            box-shadow: 0 0 10px #f093fb;
+            box-shadow: 0 0 10px #FFB6D9;
         }
 
         h1 {
-            color: #667eea;
+            color: #5EB3D6;
             font-size: clamp(32px, 8vw, 48px);
             font-weight: 900;
             font-style: italic;
@@ -121,7 +121,7 @@
         }
 
         h2 {
-            color: #667eea;
+            color: #5EB3D6;
             font-size: clamp(24px, 6vw, 36px);
             font-weight: 900;
             margin-bottom: clamp(10px, 3vw, 20px);
@@ -129,7 +129,7 @@
         }
 
         p {
-            color: #667eea;
+            color: #5EB3D6;
             font-weight: bold;
             margin: clamp(5px, 2vw, 10px) 0;
             font-size: clamp(12px, 3vw, 16px);
@@ -144,7 +144,7 @@
         }
 
         ul li {
-            color: #667eea;
+            color: #5EB3D6;
             font-weight: bold;
             margin: clamp(5px, 2vw, 10px) 0;
         }
@@ -176,10 +176,10 @@
             display: flex;
             align-items: center;
             gap: clamp(5px, 2vw, 10px);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #7EC8E3 0%, #A8D8EA 100%);
             padding: clamp(4px, 1.5vw, 8px) clamp(6px, 2vw, 12px);
             border-radius: 8px;
-            border: 1px solid #764ba2;
+            border: 1px solid #5EB3D6;
         }
 
         #status-avatar {
@@ -214,7 +214,7 @@
         .location-label {
             font-size: clamp(7px, 1.5vw, 9px);
             font-weight: bold;
-            color: #2563eb;
+            color: #5EB3D6;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin: 0;
@@ -223,7 +223,7 @@
         #current-loc {
             font-weight: bold;
             font-size: clamp(12px, 3vw, 16px);
-            color: #1d4ed8;
+            color: #2C5F7F;
             margin: 0;
         }
 
@@ -234,7 +234,7 @@
         .stamina-label {
             font-size: clamp(7px, 1.5vw, 9px);
             font-weight: bold;
-            color: #dc2626;
+            color: #FFB6D9;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: clamp(2px, 1vw, 4px);
@@ -251,7 +251,7 @@
             align-items: center;
             justify-content: center;
             padding: clamp(8px, 2vw, 20px);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background: linear-gradient(135deg, #A8D8EA 0%, #FFD5B0 50%, #FFB6D9 100%);
             position: relative;
         }
 
@@ -260,7 +260,7 @@
             grid-template-columns: repeat(5, 1fr);
             grid-template-rows: repeat(5, 1fr);
             gap: clamp(4px, 1vw, 6px);
-            background: #8b4513;
+            background: #E8F4F8;
             padding: clamp(8px, 2vw, 12px);
             border-radius: 15px;
             width: min(85vh, 95vw);
@@ -272,8 +272,8 @@
         }
 
         .tile {
-            background: linear-gradient(135deg, #fffef9 0%, #fff9e6 100%);
-            border: clamp(2px, 0.5vw, 3px) solid #8b5a2b;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F0F8FF 100%);
+            border: clamp(2px, 0.5vw, 3px) solid #B8D4E8;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -293,8 +293,8 @@
 
         .tile:hover {
             transform: translateY(-3px);
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 6px 15px rgba(102, 126, 234, 0.4);
-            background: linear-gradient(135deg, #fff9f0 0%, #fff9e6 100%);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 6px 15px rgba(126, 200, 227, 0.4);
+            background: linear-gradient(135deg, #F5FCFF 0%, #F0F8FF 100%);
         }
 
         .tile span {
@@ -318,19 +318,19 @@
             border-bottom: 2px solid rgba(0,0,0,0.15);
         }
 
-        .side-top .tile-header { background: linear-gradient(135deg, #00c853 0%, #00897b 100%); }
-        .side-right .tile-header { background: linear-gradient(135deg, #00c853 0%, #00897b 100%); }
-        .side-bottom .tile-header { background: linear-gradient(135deg, #00c853 0%, #00897b 100%); }
-        .side-left .tile-header { background: linear-gradient(135deg, #00c853 0%, #00897b 100%); }
+        .side-top .tile-header { background: linear-gradient(135deg, #FFCB99 0%, #FFD5B0 100%); }
+        .side-right .tile-header { background: linear-gradient(135deg, #FFCB99 0%, #FFD5B0 100%); }
+        .side-bottom .tile-header { background: linear-gradient(135deg, #FFCB99 0%, #FFD5B0 100%); }
+        .side-left .tile-header { background: linear-gradient(135deg, #FFCB99 0%, #FFD5B0 100%); }
         .corner-tile { 
-            background: linear-gradient(135deg, #fffef9 0%, #fff9e6 100%);
-            border: 3px solid #8b5a2b;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F0F8FF 100%);
+            border: 3px solid #B8D4E8;
             box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 2px 5px rgba(0,0,0,0.2);
             border-radius: 4px;
         }
         
         .corner-tile .tile-header {
-            background: linear-gradient(135deg, #00c853 0%, #00897b 100%) !important;
+            background: linear-gradient(135deg, #FFCB99 0%, #FFD5B0 100%) !important;
         }
 
         .player-token {
@@ -374,8 +374,8 @@
         }
 
         .btn-dir {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: clamp(2px, 0.5vw, 3px) solid #c41e3a;
+            background: linear-gradient(135deg, #7EC8E3 0%, #A8D8EA 100%);
+            border: clamp(2px, 0.5vw, 3px) solid #5EB3D6;
             color: white;
             width: clamp(55px, 12vw, 65px);
             height: clamp(55px, 12vw, 65px);
@@ -392,14 +392,14 @@
         }
 
         .btn-dir:hover:not(:disabled) {
-            background: linear-gradient(135deg, #764ba2 0%, #f093fb 100%);
+            background: linear-gradient(135deg, #A8D8EA 0%, #FFB6D9 100%);
             transform: translateY(-2px);
-            box-shadow: 0 clamp(4px, 1.2vw, 7px) 0 #8b1a38;
+            box-shadow: 0 clamp(4px, 1.2vw, 7px) 0 #5EB3D6;
         }
 
         .btn-dir:active:not(:disabled) { 
             transform: translateY(2px); 
-            box-shadow: 0 clamp(1px, 0.3vw, 2px) 0 #8b1a38; 
+            box-shadow: 0 clamp(1px, 0.3vw, 2px) 0 #5EB3D6; 
         }
 
         .btn-dir:disabled {
@@ -409,9 +409,9 @@
         }
 
         .btn-dir.active {
-            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-            border-color: #16a34a;
-            box-shadow: 0 0 15px rgba(34, 197, 94, 0.6), 0 clamp(3px, 1vw, 5px) 0 #16a34a;
+            background: linear-gradient(135deg, #FFB6D9 0%, #FFD5B0 100%);
+            border-color: #FFCB99;
+            box-shadow: 0 0 15px rgba(255, 203, 153, 0.6), 0 clamp(3px, 1vw, 5px) 0 #FFCB99;
         }
 
         .btn-dir span { 
@@ -428,7 +428,7 @@
         }
 
         .quiz-header {
-            color: #667eea;
+            color: #5EB3D6;
             font-weight: 900;
             font-size: clamp(10px, 2vw, 13px);
             text-transform: uppercase;
@@ -438,7 +438,7 @@
 
         .quiz-question {
             font-size: clamp(18px, 4vw, 24px);
-            color: #5b21b6;
+            color: #2C5F7F;
             font-weight: bold;
             font-style: italic;
             line-height: 1.3;
@@ -452,14 +452,14 @@
         }
 
         .quiz-opt-btn {
-            background: linear-gradient(135deg, #e0f2fe 0%, #bfdbfe 100%);
-            border: clamp(2px, 0.5vw, 3px) solid #667eea;
+            background: linear-gradient(135deg, #E6F7FF 0%, #D4EEF7 100%);
+            border: clamp(2px, 0.5vw, 3px) solid #7EC8E3;
             padding: clamp(12px, 2.5vw, 16px) clamp(10px, 2vw, 15px);
             border-radius: clamp(8px, 2vw, 10px);
             text-align: left;
             font-weight: bold;
             font-size: clamp(13px, 2.5vw, 16px);
-            color: #5b21b6;
+            color: #2C5F7F;
             cursor: pointer;
             transition: all 0.2s;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
@@ -468,8 +468,8 @@
         }
 
         .quiz-opt-btn:hover {
-            border-color: #ec4899;
-            background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+            border-color: #FFB6D9;
+            background: linear-gradient(135deg, #FFF0F7 0%, #FFDDE8 100%);
         }
 
         .quiz-opt-btn:active {
@@ -487,7 +487,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(249, 243, 229, 0.95);
+            background: rgba(240, 248, 255, 0.95);
             display: none;
             flex-direction: column;
             align-items: center;
@@ -535,8 +535,8 @@
 
         .center-area {
             grid-area: 2 / 2 / 5 / 5;
-            background: linear-gradient(135deg, #e1f5ff 0%, #b3e5fc 100%);
-            border: clamp(2px, 0.5vw, 4px) double #01579b;
+            background: linear-gradient(135deg, #D4EEF7 0%, #A8D8EA 100%);
+            border: clamp(2px, 0.5vw, 4px) double #2C5F7F;
             border-radius: 8px;
             padding: clamp(12px, 2vw, 20px);
             display: flex;
@@ -549,7 +549,7 @@
         }
 
         .center-title {
-            color: #3730a3;
+            color: #2C5F7F;
             font-weight: 900;
             font-size: clamp(18px, 4.5vw, 28px);
             font-style: italic;
@@ -558,7 +558,7 @@
         }
 
         .center-subtitle {
-            color: #5b4281;
+            color: #5EB3D6;
             opacity: 0.7;
             font-size: clamp(8px, 1.5vw, 12px);
             font-weight: 900;
@@ -578,8 +578,8 @@
         }
 
         .char-card {
-            background: linear-gradient(135deg, rgba(168, 85, 247, 0.2) 0%, rgba(236, 72, 153, 0.2) 100%);
-            border: clamp(1.5px, 0.5vw, 2px) solid #a78bfa;
+            background: linear-gradient(135deg, rgba(126, 200, 227, 0.2) 0%, rgba(255, 182, 217, 0.2) 100%);
+            border: clamp(1.5px, 0.5vw, 2px) solid #7EC8E3;
             padding: clamp(12px, 3vw, 20px);
             border-radius: 15px;
             text-align: center;
@@ -589,8 +589,8 @@
         }
 
         .char-card:hover {
-            border-color: #ec4899;
-            background: linear-gradient(135deg, rgba(236, 72, 153, 0.3) 0%, rgba(168, 85, 247, 0.3) 100%);
+            border-color: #FFB6D9;
+            background: linear-gradient(135deg, rgba(255, 182, 217, 0.3) 0%, rgba(126, 200, 227, 0.3) 100%);
         }
 
         .char-svg {
