@@ -1144,7 +1144,10 @@
             active: false,
             isMoving: false,
             visited: new Set(),
-            currentQuiz: null
+            currentQuiz: null,
+            autoMode: false,
+            autoPaused: false,
+            autoTimer: null
         };
 
         let audioContext = null;
@@ -1327,7 +1330,64 @@
         }
         
         function handleRight() {
-            handleMove('right');
+            // toggle auto mode: if already auto, stop; otherwise start auto-walk clockwise
+            if (state.autoMode) {
+                stopAuto();
+            } else {
+                startAuto();
+            }
+        }
+
+        function startAuto() {
+            if (state.autoMode) return;
+            state.autoMode = true;
+            state.autoPaused = false;
+            // start first step
+            state.autoTimer = setTimeout(autoStep, 300);
+            updateControlButtons();
+        }
+
+        function stopAuto() {
+            state.autoMode = false;
+            state.autoPaused = false;
+            if (state.autoTimer) {
+                clearTimeout(state.autoTimer);
+                state.autoTimer = null;
+            }
+            updateControlButtons();
+        }
+
+        function autoStep() {
+            if (!state.autoMode || state.autoPaused) return;
+            // stop when reached final tile (Aceh index 15)
+            const lastIdx = cityData.length - 1;
+            if (state.idx === lastIdx) {
+                stopAuto();
+                return;
+            }
+
+            // move clockwise by one
+            state.isMoving = true;
+            state.idx = (state.idx + 1) % cityData.length;
+            updateTokenPos();
+            updateControlButtons();
+
+            state.autoTimer = setTimeout(() => {
+                if (!state.visited.has(state.idx)) {
+                    state.visited.add(state.idx);
+                    // pause auto when showing quiz
+                    state.autoPaused = true;
+                    showQuiz();
+                } else {
+                    state.isMoving = false;
+                    // schedule next step if still autoMode
+                    if (state.autoMode && !state.autoPaused && state.idx !== lastIdx) {
+                        state.autoTimer = setTimeout(autoStep, 300);
+                    } else if (state.idx === lastIdx) {
+                        stopAuto();
+                    }
+                }
+            }, 850);
         }
 
         function updateControlButtons() {
@@ -1407,6 +1467,13 @@
                     finish(true);
                 }
                 updateTokenPos();
+                // resume auto if it was running before quiz
+                if (state.autoMode) {
+                    state.autoPaused = false;
+                    // schedule next step
+                    if (state.autoTimer) clearTimeout(state.autoTimer);
+                    state.autoTimer = setTimeout(autoStep, 300);
+                }
                 updateControlButtons();
             }, 2000);
         }

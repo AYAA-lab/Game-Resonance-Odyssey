@@ -1154,7 +1154,10 @@
             active: false,
             isMoving: false,
             visited: new Set(),
-            currentQuiz: null
+            currentQuiz: null,
+            autoMode: false,
+            autoPaused: false,
+            autoTimer: null
         };
 
         let audioContext = null;
@@ -1374,6 +1377,8 @@
                 container.appendChild(btn);
             });
             
+            // pause auto-walk while quiz is shown
+            state.autoPaused = true;
             overlay.classList.add('show');
         }
 
@@ -1417,6 +1422,12 @@
                     finish(true);
                 }
                 updateTokenPos();
+                // resume auto if it was running before quiz
+                if (state.autoMode) {
+                    state.autoPaused = false;
+                    if (state.autoTimer) clearTimeout(state.autoTimer);
+                    state.autoTimer = setTimeout(autoStep, 300);
+                }
                 updateControlButtons();
             }, 2000);
         }
@@ -1439,7 +1450,59 @@
         }
 
         function handleRight() {
-            handleMove('right');
+            // toggle auto mode: if already auto, stop; otherwise start auto-walk clockwise
+            if (state.autoMode) {
+                stopAuto();
+            } else {
+                startAuto();
+            }
+        }
+
+        function startAuto() {
+            if (state.autoMode) return;
+            state.autoMode = true;
+            state.autoPaused = false;
+            state.autoTimer = setTimeout(autoStep, 300);
+            updateControlButtons();
+        }
+
+        function stopAuto() {
+            state.autoMode = false;
+            state.autoPaused = false;
+            if (state.autoTimer) {
+                clearTimeout(state.autoTimer);
+                state.autoTimer = null;
+            }
+            updateControlButtons();
+        }
+
+        function autoStep() {
+            if (!state.autoMode || state.autoPaused) return;
+            const lastIdx = cityData.length - 1;
+            if (state.idx === lastIdx) {
+                stopAuto();
+                return;
+            }
+
+            state.isMoving = true;
+            state.idx = (state.idx + 1) % cityData.length;
+            updateTokenPos();
+            updateControlButtons();
+
+            state.autoTimer = setTimeout(() => {
+                if (!state.visited.has(state.idx)) {
+                    state.visited.add(state.idx);
+                    state.autoPaused = true;
+                    showQuiz();
+                } else {
+                    state.isMoving = false;
+                    if (state.autoMode && !state.autoPaused && state.idx !== lastIdx) {
+                        state.autoTimer = setTimeout(autoStep, 300);
+                    } else if (state.idx === lastIdx) {
+                        stopAuto();
+                    }
+                }
+            }, 850);
         }
 
         function updateControlButtons() {
