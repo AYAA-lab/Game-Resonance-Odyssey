@@ -1051,10 +1051,10 @@
             <div id="player-token" class="player-token hidden"></div>
         </div>
 
-        <!-- Control Button (Satu tombol Maju) -->
+        <!-- Control Button (Tombol kanan saja) -->
         <div id="move-btn-ctrl" class="control-group hidden">
             <div class="btn-dir-container">
-                <button class="btn-dir" id="btn-forward" onclick="handleForward()">Maju ▶</button>
+                <button class="btn-dir" id="btn-right" onclick="handleRight()">▶</button>
             </div>
         </div>
     </main>
@@ -1326,27 +1326,17 @@
             }, 850);
         }
         
-        function handleForward() {
-            if (!state.active || state.isMoving) return;
-            state.isMoving = true;
-            state.idx = (state.idx + 1) % 16;
-            updateTokenPos();
-            updateControlButtons();
-
-            setTimeout(() => {
-                if (!state.visited.has(state.idx)) {
-                    state.visited.add(state.idx);
-                    showQuiz();
-                } else {
-                    state.isMoving = false;
-                }
-            }, 850);
+        function handleRight() {
+            handleMove('right');
         }
 
         function updateControlButtons() {
-            const btn = document.getElementById('btn-forward');
+            const btn = document.getElementById('btn-right');
             if (!btn) return;
-            btn.disabled = !state.active || state.isMoving;
+            const i = state.idx;
+            // right is valid on top row (0-4) and bottom row (9-12)
+            const canRight = (i >= 0 && i <= 4) || (i >= 9 && i <= 12);
+            btn.disabled = !state.active || state.isMoving || !canRight;
         }
 
         function showQuiz() {
@@ -1436,6 +1426,10 @@
             
             overlay.classList.add('show');
         }
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === "ArrowRight") handleMove('right');
+        });
 
         initBoard();
     </script>
