@@ -1051,13 +1051,10 @@
             <div id="player-token" class="player-token hidden"></div>
         </div>
 
-        <!-- Control Button -->
+        <!-- Control Button (Satu tombol Maju) -->
         <div id="move-btn-ctrl" class="control-group hidden">
             <div class="btn-dir-container">
-                <button style="grid-column: 2;" class="btn-dir" id="btn-up" onclick="handleMove('up')">▲</button>
-                <button style="grid-column: 1;" class="btn-dir" id="btn-left" onclick="handleMove('left')">◀</button>
-                <button style="grid-column: 3;" class="btn-dir" id="btn-right" onclick="handleMove('right')">▶</button>
-                <button style="grid-column: 2;" class="btn-dir" id="btn-down" onclick="handleMove('down')">▼</button>
+                <button class="btn-dir" id="btn-forward" onclick="handleForward()">Maju ▶</button>
             </div>
         </div>
     </main>
@@ -1328,40 +1325,28 @@
                 }
             }, 850);
         }
+        
+        function handleForward() {
+            if (!state.active || state.isMoving) return;
+            state.isMoving = true;
+            state.idx = (state.idx + 1) % 16;
+            updateTokenPos();
+            updateControlButtons();
+
+            setTimeout(() => {
+                if (!state.visited.has(state.idx)) {
+                    state.visited.add(state.idx);
+                    showQuiz();
+                } else {
+                    state.isMoving = false;
+                }
+            }, 850);
+        }
 
         function updateControlButtons() {
-            const i = state.idx;
-            const buttons = {
-                up: document.getElementById('btn-up'),
-                down: document.getElementById('btn-down'),
-                left: document.getElementById('btn-left'),
-                right: document.getElementById('btn-right')
-            };
-
-            // Reset semua
-            Object.values(buttons).forEach(btn => {
-                btn.disabled = true;
-                btn.classList.remove('active');
-            });
-
-            // Tentukan tombol mana saja yang aktif berdasarkan lokasi
-            if (i >= 0 && i <= 4) {
-                // Top row: hanya LEFT dan RIGHT
-                buttons.left.disabled = false;
-                buttons.right.disabled = false;
-            } else if (i >= 5 && i <= 8) {
-                // Right side: hanya UP dan DOWN
-                buttons.up.disabled = false;
-                buttons.down.disabled = false;
-            } else if (i >= 9 && i <= 12) {
-                // Bottom row: hanya LEFT dan RIGHT
-                buttons.left.disabled = false;
-                buttons.right.disabled = false;
-            } else if (i >= 13 && i <= 15) {
-                // Left side: hanya UP dan DOWN
-                buttons.up.disabled = false;
-                buttons.down.disabled = false;
-            }
+            const btn = document.getElementById('btn-forward');
+            if (!btn) return;
+            btn.disabled = !state.active || state.isMoving;
         }
 
         function showQuiz() {
@@ -1451,50 +1436,6 @@
             
             overlay.classList.add('show');
         }
-
-        function updateControlButtons() {
-            const i = state.idx;
-            const buttons = {
-                up: document.getElementById('btn-up'),
-                down: document.getElementById('btn-down'),
-                left: document.getElementById('btn-left'),
-                right: document.getElementById('btn-right')
-            };
-
-            // Reset semua tombol
-            Object.values(buttons).forEach(btn => {
-                if (btn) {
-                    btn.disabled = true;
-                    btn.classList.remove('active');
-                }
-            });
-
-            // Tentukan tombol mana saja yang aktif berdasarkan lokasi pemain
-            if (i >= 0 && i <= 4) {
-                // Top row: hanya LEFT dan RIGHT
-                if (buttons.left) buttons.left.disabled = false;
-                if (buttons.right) buttons.right.disabled = false;
-            } else if (i >= 5 && i <= 8) {
-                // Right side: hanya UP dan DOWN
-                if (buttons.up) buttons.up.disabled = false;
-                if (buttons.down) buttons.down.disabled = false;
-            } else if (i >= 9 && i <= 12) {
-                // Bottom row: hanya LEFT dan RIGHT
-                if (buttons.left) buttons.left.disabled = false;
-                if (buttons.right) buttons.right.disabled = false;
-            } else if (i >= 13 && i <= 15) {
-                // Left side: hanya UP dan DOWN
-                if (buttons.up) buttons.up.disabled = false;
-                if (buttons.down) buttons.down.disabled = false;
-            }
-        }
-
-        window.addEventListener('keydown', (e) => {
-            if (e.key === "ArrowUp") handleMove('up');
-            if (e.key === "ArrowDown") handleMove('down');
-            if (e.key === "ArrowLeft") handleMove('left');
-            if (e.key === "ArrowRight") handleMove('right');
-        });
 
         initBoard();
     </script>
