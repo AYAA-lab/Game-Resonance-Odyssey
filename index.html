@@ -1157,8 +1157,11 @@
             currentQuiz: null,
             autoMode: false,
             autoPaused: false,
-            autoTimer: null
+            autoTimer: null,
+            currentAudio: null
         };
+        
+        const TRAVEL_DURATION = 5000; // 5 seconds untuk perjalanan (agar musik bisa dimainkan)
 
         let audioContext = null;
 
@@ -1342,6 +1345,9 @@
             updateTokenPos();
             updateControlButtons();
 
+            // Putar musik perjalanan ke kota ini
+            playTravelMusic(state.idx);
+
             setTimeout(() => {
                 if (!state.visited.has(state.idx)) {
                     state.visited.add(state.idx);
@@ -1349,10 +1355,16 @@
                 } else {
                     state.isMoving = false;
                 }
-            }, 850);
+            }, TRAVEL_DURATION);
         }
 
         function showQuiz() {
+            // Hentikan musik perjalanan saat quiz muncul
+            if (state.currentAudio) {
+                state.currentAudio.pause();
+                state.currentAudio.currentTime = 0;
+            }
+            
             state.currentQuiz = cityQuestions[state.idx];
             
             if (!state.currentQuiz) {
@@ -1458,6 +1470,21 @@
             }
         }
 
+        function playTravelMusic(cityIdx) {
+            // Stop musik yang sedang dimainkan
+            if (state.currentAudio) {
+                state.currentAudio.pause();
+                state.currentAudio.currentTime = 0;
+            }
+            
+            // Jika ada musik untuk kota ini, putar
+            if (cityIdx < cityData.length && cityData[cityIdx].music) {
+                state.currentAudio = new Audio(cityData[cityIdx].music);
+                state.currentAudio.volume = 0.5; // volume 50%
+                state.currentAudio.play().catch(e => console.log('Musik tidak bisa diputar:', e));
+            }
+        }
+
         function startAuto() {
             if (state.autoMode) return;
             state.autoMode = true;
@@ -1489,6 +1516,9 @@
             updateTokenPos();
             updateControlButtons();
 
+            // Putar musik perjalanan
+            playTravelMusic(state.idx);
+
             state.autoTimer = setTimeout(() => {
                 if (!state.visited.has(state.idx)) {
                     state.visited.add(state.idx);
@@ -1502,7 +1532,7 @@
                         stopAuto();
                     }
                 }
-            }, 850);
+            }, TRAVEL_DURATION);
         }
 
         function updateControlButtons() {
