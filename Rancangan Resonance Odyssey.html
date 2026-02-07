@@ -569,13 +569,20 @@
         }
 
         /* Character Grid */
+        /* Char grid: tetap gunakan ukuran kartu yang konsisten di semua device
+           dan berikan horizontal scrolling pada layar sempit agar tata letak tetap rapi */
         .char-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(clamp(120px, 25vw, 160px), 1fr));
-            gap: clamp(15px, 5vw, 30px);
+            grid-auto-flow: column;
+            grid-auto-columns: 160px;
+            gap: clamp(12px, 3vw, 18px);
             margin-bottom: clamp(20px, 5vw, 40px);
             width: 100%;
-            max-width: 900px;
+            justify-content: center;
+            align-items: start;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            -webkit-overflow-scrolling: touch;
         }
 
         .char-card {
@@ -608,16 +615,41 @@
             display: block !important;
         }
 
-        .char-name {
-            font-weight: 900;
-            color: #fcd34d;
-            text-transform: uppercase;
-            font-size: clamp(10px, 2.5vw, 14px);
-            line-height: 1.1;
-            margin: 0;
+        .char-card {
+            /* ukuran tetap agar konsisten antar device */
+            width: 160px;
+            height: 220px;
+            min-width: 160px;
+            background: linear-gradient(135deg, rgba(126, 200, 227, 0.2) 0%, rgba(255, 182, 217, 0.2) 100%);
+            border: clamp(1.5px, 0.5vw, 2px) solid #7EC8E3;
+            padding: 10px 12px;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.16);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
         }
 
-        /* End Screen */
+        .char-card img,
+        .char-card svg {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .char-name {
+            font-weight: 900;
+            color: #f7c26b;
+            text-transform: uppercase;
+            font-size: 13px;
+            margin: 0;
+        }
         #end-overlay {
             display: none;
         }
